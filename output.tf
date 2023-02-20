@@ -29,12 +29,12 @@ output "private_subnet_cidrs" {
 }
 
 output "public_subnet_azs" {
-  description = "Public subnets AZs"
+  description = "Public subnets availability zones"
   value       = module.vpc.public_subnet_availability_zones
 }
 
 output "private_subnet_azs" {
-  description = "Private subnets AZs"
+  description = "Private subnets availability zones"
   value       = module.vpc.private_subnet_availability_zones
 }
 
@@ -49,7 +49,7 @@ output "nat_gw_ids" {
 }
 
 output "nat_gw_eips" {
-  description = "NAT Gateway EIPs"
+  description = "NAT Gateway Elastic IPs"
   value       = module.vpc.nat_gw_eips
 }
 
