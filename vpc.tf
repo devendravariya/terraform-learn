@@ -13,7 +13,7 @@ module "vpc" {
   public_subnet_names = var.public_subnet_names
   default_vpc_enable_dns_hostnames = var.dns_hostnames
   default_vpc_enable_dns_support = var.dns_support
-  single_nat_gateway = var.nat
+  single_nat_gateway = var.nat  
   
 
 

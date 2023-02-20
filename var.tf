@@ -49,21 +49,3 @@ variable "public_subnet_names" {
     description = "name of the public subnets"
     default = ["public-1", "public-2", "public-3"]
 }
-
-variable "dns_hostnames" {
-    type = bool
-    description = "enable dns hostnames"
-    default = true
-}
-
-variable "dns_support" {
-    type = bool
-    description = "enable dns support"
-    default = true
-}
-
-variable "nat" {
-    type = bool
-    description = "enable single nat gateway"
-    default = true
-}
