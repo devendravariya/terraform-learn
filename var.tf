@@ -23,14 +23,13 @@ variable "subnet-azs" {
 variable "private-cidr" {
     type = list(string)
     description = "cidr block for the private subnets"
-    default = ["192.168.48.0/20", "192.168.60.0/20", "192.168.64.0/20"]
+    default = ["192.168.48.0/20", "192.168.64.0/20", "192.168.80.0/20"]
 }
 
 variable "public-cidr" {
     type = list(string)
     description = "cidr block for the public subnets"
-    default = ["192.168.0.0/20", "192.168.8.0/20", "192.168.16.0/20"]
-
+    default = ["192.168.0.0/20", "192.168.16.0/20", "192.168.32.0/20"]
 }
 
 variable "igw" {
