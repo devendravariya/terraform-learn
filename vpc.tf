@@ -11,11 +11,10 @@ module "vpc" {
   create_igw = var.igw
   private_subnet_names = var.private_subnet_names
   public_subnet_names = var.public_subnet_names
-  default_vpc_enable_dns_hostnames = true
-  default_vpc_enable_dns_support = true
   enable_nat_gateway = true
   single_nat_gateway = true
-  
+  enable_dns_support = true
+  enable_dns_hostnames = true
 
 
   tags = {
