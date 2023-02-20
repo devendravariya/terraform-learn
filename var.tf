@@ -65,5 +65,5 @@ variable "dns_support" {
 variable "nat" {
     type = bool
     description = "enable single nat gateway"
-    default = false
+    default = true
 }
