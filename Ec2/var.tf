@@ -114,3 +114,10 @@ variable "allowed_cidr_blocks_v6" {
     "2c0f:f248::/32",
   ]
 }
+
+variable "allowed_cidr_blocks" {
+  type    = list(string)
+  default = [
+    "192.168.0.0/16"
+  ]
+}
