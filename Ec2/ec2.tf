@@ -35,3 +35,7 @@ resource "aws_eip" "eip" {
         Environment = "dev"
     }
 }
+
+output "e2_instance_id" {
+    value = module.ec2_instance.this_instance_id
+}
