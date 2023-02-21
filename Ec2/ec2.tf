@@ -27,8 +27,11 @@ EOF
         Environment = "dev"
     }
 }
-
-resource "eip" "eip" {
+resource "aws_eip" "eip" {
     vpc = true
-    instance = module.output.ec2_instance_id
+    instance = output.e2_instance_id
+    tags = {
+        Name = "bitbucket"
+        Environment = "dev"
+    }
 }
