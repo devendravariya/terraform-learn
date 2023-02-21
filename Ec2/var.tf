@@ -121,3 +121,27 @@ variable "allowed_cidr_blocks" {
     "192.168.0.0/16"
   ]
 }
+
+variable "ami" {
+  type = string
+  description = "AMI ID"
+  default = "ami-0b69ea66ff7391e80"
+}
+
+variable "instance_type" {
+  type = string
+  description = "Instance type"
+  default = "t2.micro"
+}
+
+variable "instance_name" {
+  type = string
+  description = "Key name"
+  default = "learn-terraform"
+}
+
+variable "key_name" {
+  type = string
+  description = "Key name"
+  default = "learn-terraform"
+}
