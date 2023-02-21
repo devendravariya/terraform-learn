@@ -16,7 +16,13 @@ module "ec2_instance" {
         delete_on_termination = true
         }
     ]
-    userdata = ./userdata.sh
+    user_data = <<EOF
+#!/bin/bash
+apt-get update
+apt-get install -y apache2
+echo "Hello, World from terraform!" > /var/www/html/index.html
+
+EOF
     tags = {
         Name = "bitbucket"
         Environment = "dev"
