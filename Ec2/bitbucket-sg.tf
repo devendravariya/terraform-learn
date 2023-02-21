@@ -61,8 +61,10 @@ resource "aws_security_group" "ssh" {
 
   }
 
-  egress {
+   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "tcp"
-    cidr_blocks = ["
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
