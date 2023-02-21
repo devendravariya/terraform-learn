@@ -27,7 +27,8 @@ EOF
         Environment = "dev"
     }
 }
-resource "aws_eip" "lb" {
-  instance = module.ec2_instance.this_instance_id
-  vpc      = true
+
+resource "eip" "eip" {
+    vpc = true
+    instance = module.output.ec2_instance_id
 }
