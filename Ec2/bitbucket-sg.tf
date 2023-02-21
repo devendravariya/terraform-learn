@@ -1,7 +1,7 @@
 resource "aws_security_group" "bitbucket_ips" {
   name = "bitbucket_ips"
   description = "Security group for Bitbucket IPs"
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = module.vpc.vpc_id
 
   ingress {
     from_port = 22
@@ -21,7 +21,7 @@ egress {
 resource "aws_security_group" "cloudflare_sg" {
   name_prefix = "cloudflare_sg"
   description = "Allow inbound traffic on ports 80 and 443"
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = module.vpc.vpc_id
   
   ingress {
     from_port   = 80
@@ -51,7 +51,7 @@ resource "aws_security_group" "cloudflare_sg" {
 resource "aws_security_group" "ssh" {
   name_prefix = "web-ssh-sg"
   description = "Allow inbound traffic on port 22"
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = module.vpc.vpc_id
   
   ingress {
     from_port   = 22
