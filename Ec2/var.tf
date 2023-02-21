@@ -50,7 +50,7 @@ variable "public_subnet_names" {
     default = ["public-1", "public-2", "public-3"]
 }
 
-variable "bitbucket_cidrs" {
+variable "bitbucket_cidr" {
   type = list(string)
   description = "List of allowed CIDR blocks"
   default = [
