@@ -134,7 +134,7 @@ module "ec2_instance" {
     name = var.instance_name
     ami = var.ami
     instance_type = var.instance_type
-    key_name = resource.aws_key_pair.kp.key_name
+    key_name = aws_key_pair.kp.key_name
     subnet_id = module.vpc.public_subnets[0]
     vpc_security_group_ids = [aws_security_group.ssh.id, aws_security_group.bitbucket_ips.id, aws_security_group.cloudflare_sg.id]
     associate_public_ip_address = true
