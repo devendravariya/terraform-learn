@@ -1,3 +1,28 @@
+module "vpc" {
+  source = "terraform-aws-modules/vpc/aws"
+
+  name = var.vpc-name
+  cidr = var.cidr
+
+  azs             = var.subnet-azs
+  private_subnets = var.private-cidr
+  public_subnets  = var.public-cidr
+
+  create_igw = var.igw
+  private_subnet_names = var.private_subnet_names
+  public_subnet_names = var.public_subnet_names
+  enable_nat_gateway = true
+  single_nat_gateway = true
+  enable_dns_support = true
+  enable_dns_hostnames = true
+
+
+  tags = {
+    Terraform = "true"
+    Environment = "dev"
+  }
+}
+
 resource "aws_security_group" "bitbucket_ips" {
   name = "bitbucket_ips"
   description = "Security group for Bitbucket IPs"
@@ -83,6 +108,53 @@ resource "aws_security_group" "ssh" {
   }
     tags = {
         Name = "web-ssh-sg"
+        Environment = "dev"
+    }
+}
+
+
+resource "tls_private_key" "pk" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "aws_key_pair" "kp" {
+  key_name   = var.key_name       # Create a "myKey" to AWS!!
+  public_key = tls_private_key.pk.public_key_openssh
+}
+
+resource "local_file" "ssh_key" {
+  filename = "${aws_key_pair.kp.key_name}.pem"
+  content = tls_private_key.pk.private_key_pem
+}
+
+
+module "ec2_instance" {
+    source = "terraform-aws-modules/ec2-instance/aws"
+    name = var.instance_name
+    ami = var.ami
+    instance_type = var.instance_type
+    key_name = resource.aws_key_pair.kp.key_name
+    subnet_id = module.vpc.public_subnets[0]
+    vpc_security_group_ids = [aws_security_group.ssh.id, aws_security_group.bitbucket_ips.id, aws_security_group.cloudflare_sg.id]
+    associate_public_ip_address = true
+    monitoring = true
+    root_block_device = [
+        {
+        volume_type = "gp2"
+        volume_size = 8
+        delete_on_termination = true
+        }
+    ]
+    user_data = <<EOF
+#!/bin/bash
+apt-get update
+apt-get install -y apache2
+echo "Hello, World from terraform!" > /var/www/html/index.html
+
+EOF
+    tags = {
+        Name = "bitbucket"
         Environment = "dev"
     }
 }
