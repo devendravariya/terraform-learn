@@ -125,7 +125,7 @@ variable "allowed_cidr_blocks" {
 variable "ami" {
   type = string
   description = "AMI ID"
-  default = "ami-0b69ea66ff7391e80"
+  default = "ami-0caf778a172362f1c"
 }
 
 variable "instance_type" {
