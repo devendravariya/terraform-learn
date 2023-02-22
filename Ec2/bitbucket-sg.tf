@@ -15,6 +15,10 @@ egress {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+ tags = {
+    Name = "bitbucket_ips"
+    Environment = "dev"
+  }
 }
 
 
@@ -45,6 +49,10 @@ resource "aws_security_group" "cloudflare_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+    tags = {
+        Name = "cloudflare_sg"
+        Environment = "dev"
+    }
 }
 
 
@@ -60,6 +68,12 @@ resource "aws_security_group" "ssh" {
     cidr_blocks = var.allowed_cidr_blocks
 
   }
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = var.allowed_cidr_blocks_v4
+  }
 
    egress {
     from_port   = 0
@@ -67,4 +81,8 @@ resource "aws_security_group" "ssh" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+    tags = {
+        Name = "web-ssh-sg"
+        Environment = "dev"
+    }
 }

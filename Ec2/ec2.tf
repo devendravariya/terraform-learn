@@ -5,7 +5,11 @@ module "ec2_instance" {
     instance_type = var.instance_type
     key_name = resource.aws_key_pair.kp.key_name
     subnet_id = module.vpc.public_subnets[0]
-    vpc_security_group_ids = ["aws_security_group.bitbucket_sg.id", "aws_security_group.cloudflare.id", "aws_security_group.jenkins_sg.id"]
+    vpc_security_group_ids = [
+        aws_security_group.bitbucket_sg.id,
+        aws_security_group.cloudflare.id,
+        aws_security_group.jenkins_sg.id,
+    ]
     associate_public_ip_address = true
     monitoring = true
     root_block_device = [
@@ -27,4 +31,3 @@ EOF
         Environment = "dev"
     }
 }
-
